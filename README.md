@@ -9,6 +9,7 @@ Este proyecto fue generado usando [Angular CLI](https://github.com/angular/angul
 - **Servicios**: Uso de servicios como `pais.service.ts` para la gestión de datos y lógica de negocio, promoviendo la reutilización y separación de responsabilidades.
 - **Componentes de Angular**: Estructuración de la aplicación en componentes reutilizables y modulares.
 - **Uso de Angular CLI**: Herramientas para desarrollo, pruebas y construcción del proyecto.
+- **Tecnología MCP Servers**: Integración y uso de servidores MCP para automatización, consultas y servicios avanzados dentro del flujo de trabajo del proyecto.
 
 ## Servidor de desarrollo
 
