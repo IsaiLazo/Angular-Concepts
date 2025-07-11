@@ -84,7 +84,7 @@
           <tr>
             <th>ID</th>
             <th>Pasatiempos</th>
-            <th>Borrar</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody formArrayName="pasatiempos">
@@ -101,7 +101,7 @@
                 }
               </td>
               <td>
-                <button type="button" class="btn btn-danger">
+                <button type="button" class="btn btn-danger" (click)="borrarPasatiempo($index)">
                   Borrar
                 </button>
               </td>
@@ -110,8 +110,10 @@
         </tbody>
       </table>
 
-      <button class="btn btn-primary mt-3 mb-5 btn-block">
-        + Agregar pasatiempo
+      <button class="btn btn-primary mt-3 mb-5 btn-block"
+              type="button"
+              (click)="agregarPasatiempo()">
+        + Agregar
       </button>
 
     </div>
