@@ -1,93 +1,122 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormControlName, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-reactive',
-  imports: [ReactiveFormsModule, CommonModule], //En la version standalone para poder utilizar 
+  standalone: true,
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './reactive.component.html',
-  styleUrl: './reactive.component.css'
+  styleUrls: ['./reactive.component.css']
 })
 export class ReactiveComponent implements OnInit {
 
-  forma!: FormGroup;
+  forma: FormGroup;
 
-  constructor(  private fb: FormBuilder ){
-    this.crearFormulario();
+  constructor(private fb: FormBuilder) {
+    this.forma = this.createForm();
     this.cargarDataAlFormulario();
   }
 
-  ngOnInit(): void{}
+  getErrorMsg(campo: string): string | null {
+    const control = this.forma.get(campo);
+    if (!control || !control.touched) return null;
+    if (control.hasError('pattern')) return 'Solo se permiten letras';
+    if (control.hasError('minlength')) return 'Ingrese 5 letras';
+    if (control.hasError('required')) {
+      if (campo === 'nombre') return 'Ingrese Nombre';
+      if (campo === 'apellido') return 'Ingrese el apellido';
+      if (campo === 'correo') return 'Ingrese el correo';
+    }
+    return null;
+  }
 
-  get pasatiempos(){
+  getErrorMsgDireccion(campo: 'distrito' | 'ciudad'): string | null {
+    const control = this.forma.get('direccion.' + campo);
+    if (!control || !control.touched) return null;
+    if (control.hasError('pattern')) return 'Solo se permiten letras';
+    if (control.hasError('required')) {
+      return campo === 'distrito' ? 'Ingrese el distrito' : 'Ingrese la ciudad';
+    }
+    return null;
+  }
+
+  ngOnInit(): void {}
+
+  get pasatiempos(): FormArray {
     return this.forma.get('pasatiempos') as FormArray;
   }
 
-  getPasatiempoControl(index: number) {
+  getPasatiempoControl(index: number): FormControl {
     return this.pasatiempos.at(index) as FormControl;
   }
 
-  public get pasatiemposControls() {
-    return this.pasatiempos.controls;
+  get pasatiemposControls(): FormControl[] {
+    return this.pasatiempos.controls as FormControl[];
   }
 
-  get nombreNoValido(){
-    return this.forma.get('nombre')?.invalid && this.forma.get('nombre')?.touched;
+  get nombreNoValido(): boolean {
+    const control = this.forma.get('nombre');
+    return !!control && control.invalid && control.touched;
   }
 
-  get apellidoNoValido(){
-    return this.forma.get('apellido')?.invalid && this.forma.get('apellido')?.touched;
+  get apellidoNoValido(): boolean {
+    const control = this.forma.get('apellido');
+    return !!control && control.invalid && control.touched;
   }
 
-  get correoNoValido(){
-    return this.forma.get('correo')?.invalid && this.forma.get('correo')?.touched;
+  get correoNoValido(): boolean {
+    const control = this.forma.get('correo');
+    return !!control && control.invalid && control.touched;
   }
 
-  get distritoNoValido(){
-    return this.forma.get('direccion.distrito')?.invalid && this.forma.get('direccion.distrito')?.touched;
+  get distritoNoValido(): boolean {
+    const control = this.forma.get('direccion.distrito');
+    return !!control && control.invalid && control.touched;
   }
 
-  get ciudadNoValida(){
-    return this.forma.get('direccion.ciudad')?.invalid && this.forma.get('direccion.ciudad')?.touched;
+  get ciudadNoValida(): boolean {
+    const control = this.forma.get('direccion.ciudad');
+    return !!control && control.invalid && control.touched;
   }
 
-  cargarDataAlFormulario(){
+  cargarDataAlFormulario(): void {
     this.forma.reset({
-      nombre: 'Fernando',
-      apellido: 'Herrera',
-      correo: 'fernando.herrera@example.com'
+      nombre: '',
+      apellido: '',
+      correo: ''
     });
   }
 
-  crearFormulario(){
-    this.forma = this.fb.group({
-      nombre  : ['', [Validators.required, Validators.minLength(5)] ],
-      apellido: ['', [Validators.required]],
-      correo  : ['', [ Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$') ]],
+  private createForm(): FormGroup {
+    const onlyLetters = Validators.pattern('^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$');
+    return this.fb.group({
+      nombre: ['', [Validators.required, Validators.minLength(5), onlyLetters]],
+      apellido: ['', [Validators.required, onlyLetters]],
+      correo: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')]],
       direccion: this.fb.group({
-        distrito : ['', Validators.required],
-        ciudad   : ['', Validators.required],
+        distrito: ['', [Validators.required, onlyLetters]],
+        ciudad: ['', [Validators.required, onlyLetters]],
       }),
       pasatiempos: this.fb.array([])
     });
   }
 
-  agregarPasatiempo() {
+  agregarPasatiempo(): void {
     this.pasatiempos.push(this.fb.control('', Validators.required));
   }
 
-  borrarPasatiempo(index: number) {
+  borrarPasatiempo(index: number): void {
     this.pasatiempos.removeAt(index);
   }
 
-  guardar(){
-    if(this.forma.invalid){
-      return Object.values(this.forma.controls).forEach( control => {
+  guardar(): void {
+    if (this.forma.invalid) {
+      Object.values(this.forma.controls).forEach(control => {
         if (control instanceof FormGroup) {
-          Object.values(control.controls).forEach( control => {
-            control.markAsTouched();
+          Object.values(control.controls).forEach(childControl => {
+            childControl.markAsTouched();
           });
-        }else {
+        } else {
           control.markAsTouched();
         }
       });

@@ -13,9 +13,9 @@
                placeholder="Nombre"
                formControlName="nombre"
                [class.is-invalid]="nombreNoValido">
-        <small *ngIf="nombreNoValido" class="text-danger">
-            Ingrese 5 letras
-        </small>
+        @if (getErrorMsg('nombre')) {
+          <small class="text-danger">{{ getErrorMsg('nombre') }}</small>
+        }
       </div>
     </div>
 
@@ -28,9 +28,9 @@
                placeholder="Apellido"
                formControlName="apellido"
                [class.is-invalid]="apellidoNoValido">
-        <small *ngIf="apellidoNoValido" class="text-danger">
-          Ingrese el apellido
-        </small>
+        @if (getErrorMsg('apellido')) {
+          <small class="text-danger">{{ getErrorMsg('apellido') }}</small>
+        }
 
       </div>
     </div>
@@ -46,9 +46,9 @@
              placeholder="Correo electrónico"
              formControlName="correo"
              [class.is-invalid]="correoNoValido">
-      <small *ngIf="correoNoValido" class="text-danger">
-        Ingrese el correo
-      </small>
+      @if (correoNoValido) {
+        <small class="text-danger">Ingrese el correo</small>
+      }
     </div>
   </div>
 
@@ -63,6 +63,9 @@
                 placeholder="Distrito"
                 formControlName="distrito"
                 [class.is-invalid]="distritoNoValido">
+        @if (getErrorMsgDireccion('distrito')) {
+          <small class="text-danger">{{ getErrorMsgDireccion('distrito') }}</small>
+        }
       </div>
 
       <div class="col">
@@ -71,6 +74,9 @@
                 placeholder="Ciudad"
                 formControlName="ciudad"
                 [class.is-invalid]="ciudadNoValida">
+        @if (getErrorMsgDireccion('ciudad')) {
+          <small class="text-danger">{{ getErrorMsgDireccion('ciudad') }}</small>
+        }
       </div>
 
     </div>
