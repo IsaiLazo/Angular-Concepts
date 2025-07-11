@@ -1,6 +1,39 @@
-# Formularios en Angular
 
-Este proyecto fue generado usando [Angular CLI](https://github.com/angular/angular-cli) versión 19.0.2.
+# Formulario Reactivo Moderno en Angular
+
+Este proyecto demuestra el desarrollo de un formulario reactivo avanzado utilizando la nueva sintaxis de Angular (v17+), con validaciones legibles y centralizadas, y la integración de MCP Servers para potenciar la automatización y la colaboración.
+
+## ¿Por qué es relevante para empresas?
+
+- **Código moderno y mantenible:** Uso de la nueva sintaxis de control de flujo (`@if`, `@for`) y componentes standalone para mayor claridad y escalabilidad.
+- **Validaciones centralizadas y UX mejorada:** Mensajes de error claros y lógica de validación reutilizable, facilitando la extensión y el mantenimiento.
+- **Automatización y colaboración:** Integración con MCP Servers para acelerar el desarrollo, la revisión y la integración continua.
+- **Ejemplo real de buenas prácticas:** El código y la estructura del proyecto siguen estándares actuales recomendados para equipos profesionales.
+
+## Tecnologías y herramientas utilizadas
+
+- **Angular 17+** (standalone components, nueva sintaxis)
+- **Reactive Forms** (validaciones avanzadas)
+- **MCP Servers** (automatización y colaboración)
+- **TypeScript** (estricto y moderno)
+
+## Ejemplo de formulario
+
+El formulario permite gestionar datos personales y pasatiempos, con validaciones en tiempo real y mensajes de error personalizados:
+
+![Demo del formulario](./screenshot-formulario.png)
+
+```html
+@if (getErrorMsg('nombre')) {
+  <small class="text-danger">{{ getErrorMsg('nombre') }}</small>
+}
+```
+
+## ¿Cómo se desarrolló?
+
+El desarrollo se realizó con ayuda de los MCP Servers, que permitieron automatizar tareas, validar código y mantener un flujo de trabajo eficiente y colaborativo.
+
+## Instrucciones rápidas
 
 ## Conceptos clave utilizados en este proyecto
 
@@ -29,40 +62,4 @@ Angular CLI incluye herramientas para generar código. Para crear un nuevo compo
 ng generate component nombre-del-componente
 ```
 
-Para ver todos los esquemas disponibles (componentes, directivas, pipes, etc.):
 
-```bash
-ng generate --help
-```
-
-## Construcción
-
-Para compilar el proyecto:
-
-```bash
-ng build
-```
-
-Los archivos resultantes estarán en la carpeta `dist/`.
-
-## Pruebas unitarias
-
-Para ejecutar pruebas unitarias con [Karma](https://karma-runner.github.io):
-
-```bash
-ng test
-```
-
-## Pruebas end-to-end
-
-Para pruebas end-to-end (e2e):
-
-```bash
-ng e2e
-```
-
-Angular CLI no incluye un framework e2e por defecto, puedes elegir el que prefieras.
-
-## Recursos adicionales
-
-Para más información sobre Angular CLI, visita la [documentación oficial](https://angular.dev/tools/cli).
