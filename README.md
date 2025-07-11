@@ -1,18 +1,11 @@
 
-# Formulario Reactivo Moderno en Angular
+# Formulario Reactivo en Angular
 
 Este proyecto demuestra el desarrollo de un formulario reactivo avanzado utilizando la nueva sintaxis de Angular (v17+), con validaciones legibles y centralizadas, y la integración de MCP Servers para potenciar la automatización y la colaboración.
 
-## ¿Por qué es relevante para empresas?
-
-- **Código moderno y mantenible:** Uso de la nueva sintaxis de control de flujo (`@if`, `@for`) y componentes standalone para mayor claridad y escalabilidad.
-- **Validaciones centralizadas y UX mejorada:** Mensajes de error claros y lógica de validación reutilizable, facilitando la extensión y el mantenimiento.
-- **Automatización y colaboración:** Integración con MCP Servers para acelerar el desarrollo, la revisión y la integración continua.
-- **Ejemplo real de buenas prácticas:** El código y la estructura del proyecto siguen estándares actuales recomendados para equipos profesionales.
-
 ## Tecnologías y herramientas utilizadas
 
-- **Angular 17+** (standalone components, nueva sintaxis)
+- **Angular 19+** (standalone components, nueva sintaxis)
 - **Reactive Forms** (validaciones avanzadas)
 - **MCP Servers** (automatización y colaboración)
 - **TypeScript** (estricto y moderno)
@@ -53,13 +46,3 @@ ng serve
 ```
 
 Luego abre tu navegador en `http://localhost:4200/`. La aplicación se recargará automáticamente al modificar los archivos fuente.
-
-## Generación de código
-
-Angular CLI incluye herramientas para generar código. Para crear un nuevo componente, ejecuta:
-
-```bash
-ng generate component nombre-del-componente
-```
-
-
