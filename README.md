@@ -10,18 +10,6 @@ Este proyecto demuestra el desarrollo de un formulario reactivo avanzado utiliza
 - **MCP Servers** (automatización y colaboración)
 - **TypeScript** (estricto y moderno)
 
-## Ejemplo de formulario
-
-El formulario permite gestionar datos personales y pasatiempos, con validaciones en tiempo real y mensajes de error personalizados:
-
-![Demo del formulario](./screenshot-formulario.png)
-
-```html
-@if (getErrorMsg('nombre')) {
-  <small class="text-danger">{{ getErrorMsg('nombre') }}</small>
-}
-```
-
 ## ¿Cómo se desarrolló?
 
 El desarrollo se realizó con ayuda de los MCP Servers, que permitieron automatizar tareas, validar código y mantener un flujo de trabajo eficiente y colaborativo.
